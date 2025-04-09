@@ -1,0 +1,24 @@
+# from here : https://github.com/Graylog2/docker-compose/blob/main/enterprise/docker-compose.yml
+# graylog ui port : 9000 credentials admin/admin
+# rabbit ui port : 15672 credentials guest/guest
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_log:/var/log/rabbitmq/
+    environment:
+      - DEFAULT_VHOST=demo
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: "on-failure" 
+  CSharp:
+    image: 'mcr.microsoft.com/devcontainers/dotnet:8.0'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    
+volumes:
+    rabbitmq_data:
+    rabbitmq_log:   
