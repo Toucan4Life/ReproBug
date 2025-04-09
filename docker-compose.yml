@@ -15,7 +15,7 @@ services:
       - "5672:5672"
     restart: "on-failure" 
   CSharp:
-    image: 'mcr.microsoft.com/devcontainers/dotnet:0-6.0'
+    image: 'mcr.microsoft.com/devcontainers/dotnet:8.0'
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     

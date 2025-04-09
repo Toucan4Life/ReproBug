@@ -31,7 +31,7 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "dotnet restore ./ReproBug/ReproBug.sln",
+	"postCreateCommand": "dotnet restore ./src/ReproBug/ReproBug.sln",
 
 	// Configure tool-specific properties.
 	"customizations": {
