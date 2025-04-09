@@ -7,6 +7,7 @@ using Moq;
 using Newtonsoft.Json;
 using SAP;
 using Microsoft.AspNetCore.Mvc.Testing;
+using ReproBug.Utils;
 
 namespace Repro.Integration.Tests
 {

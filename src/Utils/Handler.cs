@@ -2,10 +2,11 @@ using System;
 using System.Threading.Tasks;
 using Repro.Domain.Communication;
 using NServiceBus;
+using ReproBug.Utils;
 
 namespace Repro.Domain
 {
-    public class PublishEnrichedMalfunctionReportFromSAPInternal(ILocationServiceAgent locationServiceAgent) :
+    public class Handler(ILocationServiceAgent locationServiceAgent) :
         IHandleMessages<SAP.MalfunctionReportInternal>
     {
         public async Task Handle(SAP.MalfunctionReportInternal message, IMessageHandlerContext context)
