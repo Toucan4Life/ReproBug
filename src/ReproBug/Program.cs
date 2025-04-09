@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseNServiceBus(_ => {
     var endpointConfiguration = new EndpointConfiguration("ReproBug");
     endpointConfiguration.UseSerialization<NewtonsoftJsonSerializer>();
+    endpointConfiguration.EnableInstallers();
     endpointConfiguration.DisableFeature<Audit>();
     endpointConfiguration.EnableOpenTelemetry();
     endpointConfiguration.Pipeline.Register(
@@ -18,7 +19,7 @@ builder.Host.UseNServiceBus(_ => {
     // RMQ transport configuration
     var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
     transport.UseConventionalRoutingTopology(QueueType.Classic);
-    transport.ConnectionString("");
+    transport.ConnectionString("host=rabbitmq;virtualhost=demo;username=guest;password=guest");
     return endpointConfiguration;
 });
 
