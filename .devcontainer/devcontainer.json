@@ -32,7 +32,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"mutantdino.resourcemonitor"
+				"mutantdino.resourcemonitor",
+				"ms-dotnettools.csdevkit"
 			]
 		}
 	},
