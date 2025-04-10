@@ -8,14 +8,17 @@ using Newtonsoft.Json;
 using SAP;
 using Microsoft.AspNetCore.Mvc.Testing;
 using ReproBug.Utils;
+using Xunit;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Repro.Integration.Tests
 {
-    [TestClass]
-    public class MalfunctionReportTestsNotMatch
+    //From https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-8.0
+    public class MalfunctionReportTestsNotMatch(WebApplicationFactory<Program> factory)
+        : IClassFixture<WebApplicationFactory<Program>>
     {
+        [Fact]
 
-        [TestMethod]
         public async Task TestMalfunctionReportMatch()
         {
             var mockLocation = new Mock<ILocationServiceAgent>();
@@ -23,7 +26,8 @@ namespace Repro.Integration.Tests
             mockLocation.Setup(t => t.GetWorkCenterDetailAsync())
                           .Returns("MAC Substations Namur");
 
-            var session = new WebApplicationFactory<Program>().WithWebHostBuilder(c =>
+            var session = factory.WithWebHostBuilder(c =>
+
             {
                 c.ConfigureTestServices(services =>
                 {
@@ -40,7 +44,9 @@ namespace Repro.Integration.Tests
             Assert.AreEqual("MAC Substations Namur", message.Name);
         }
 
-        [TestMethod]
+
+        [Fact]
+
         public async Task TestMalfunctionReportNotMatch()
         {
             var mockLocation = new Mock<ILocationServiceAgent>();
@@ -48,7 +54,9 @@ namespace Repro.Integration.Tests
             mockLocation.Setup(t => t.GetWorkCenterDetailAsync())
                 .Returns("NOTAGOODNAME");
 
-            var session = new WebApplicationFactory<Program>().WithWebHostBuilder(c =>
+
+            var session = factory.WithWebHostBuilder(c =>
+
             {
                 c.ConfigureTestServices(services =>
                 {
