@@ -18,6 +18,7 @@ namespace Repro.Integration.Tests
         : IClassFixture<WebApplicationFactory<Program>>
     {
         [Fact]
+
         public async Task TestMalfunctionReportMatch()
         {
             var mockLocation = new Mock<ILocationServiceAgent>();
@@ -26,6 +27,7 @@ namespace Repro.Integration.Tests
                           .Returns("MAC Substations Namur");
 
             var session = factory.WithWebHostBuilder(c =>
+
             {
                 c.ConfigureTestServices(services =>
                 {
@@ -42,7 +44,9 @@ namespace Repro.Integration.Tests
             Assert.AreEqual("MAC Substations Namur", message.Name);
         }
 
+
         [Fact]
+
         public async Task TestMalfunctionReportNotMatch()
         {
             var mockLocation = new Mock<ILocationServiceAgent>();
@@ -50,7 +54,9 @@ namespace Repro.Integration.Tests
             mockLocation.Setup(t => t.GetWorkCenterDetailAsync())
                 .Returns("NOTAGOODNAME");
 
+
             var session = factory.WithWebHostBuilder(c =>
+
             {
                 c.ConfigureTestServices(services =>
                 {
